@@ -310,6 +310,11 @@ class MainnetNode:
         # Credit the mining pool
         self.credit(mining_pool.name, current_reward + total_fees)
 
+        # Credit recipients of all transactions in the block
+        for tx in selected_txs:
+            if tx.from_addr != "COINBASE":  # Skip coinbase (already credited above)
+                self.credit(tx.to_addr, tx.amount)
+
         print(f"✅ Block {new_index} mined in {elapsed:.2f}s ({attempts:,} attempts)")
         print(f"   Hash:   {candidate.hash}")
         print(f"   Reward: {current_reward:.8f} BTC + {total_fees:.8f} fees")

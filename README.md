@@ -81,11 +81,13 @@ python3 blockchain_validator.py
 ```
 
 Validates mined blocks and simulates reward consolidation with comprehensive blockchain verification:
-- 10-point validation checklist per block (hash format, proof-of-work, merkle root, timestamps, etc.)
-- Network consensus simulation with confirmation tracking
-- Transaction validation and double-spend checking
+- **10-point validation checklist** per block: hash format, proof-of-work, merkle root, timestamp validity, nonce validation, previous hash linking, transaction validity, double-spend detection, signature verification, and block size validation
+- Network consensus simulation with confirmation tracking (6+ confirmations = confirmed)
+- Transaction validation with security checks
 - Reward consolidation to a single wallet
 - Detailed validation report generation
+
+**Note:** This is a simulation for educational purposes demonstrating blockchain validation concepts.
 
 Generates a `blockchain_validation_report.json` file with complete validation results.
 

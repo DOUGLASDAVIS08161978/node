@@ -45,6 +45,13 @@ This is a **purely educational** simulation that demonstrates how Bitcoin mainne
 - ✅ Fork resolution statistics
 - ✅ Real-time chain status display
 
+### Validation & Verification
+- ✅ Comprehensive block validation (10-point checklist)
+- ✅ Network consensus simulation with confirmations
+- ✅ Transaction validation and double-spend detection
+- ✅ Reward consolidation system
+- ✅ Blockchain verification reporting
+
 ## Quick Start
 
 ### Run the Full Simulation
@@ -66,6 +73,23 @@ python3 test_simulator.py
 ```
 
 Runs a quick 10-block simulation to verify functionality.
+
+### Blockchain Validator
+
+```bash
+python3 blockchain_validator.py
+```
+
+Validates mined blocks and simulates reward consolidation with comprehensive blockchain verification:
+- **10-point validation checklist** per block: hash format, proof-of-work, merkle root, timestamp validity, nonce validation, previous hash linking, transaction validity, double-spend detection, signature verification, and block size validation
+- Network consensus simulation with confirmation tracking (6+ confirmations = confirmed)
+- Transaction validation with security checks
+- Reward consolidation to a single wallet
+- Detailed validation report generation
+
+**Note:** This is a simulation for educational purposes demonstrating blockchain validation concepts.
+
+Generates a `blockchain_validation_report.json` file with complete validation results.
 
 ## Mining Pools
 

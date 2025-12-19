@@ -1,0 +1,11 @@
+# Install dependencies
+npm install
+
+# Single node mining (3 attempts)
+npm start
+
+# Multi-node mining (3 nodes, parallel)
+npm run multi
+
+# Quick test
+npm test

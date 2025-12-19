@@ -1,0 +1,25 @@
+{
+  "name": "bitcoin-testnet-miner",
+  "version": "1.0.0",
+  "description": "Bitcoin testnet mining with quantum and classical miners",
+  "main": "testnet_miner.js",
+  "scripts": {
+    "start": "node testnet_miner.js",
+    "multi": "node multi_node_miner.js",
+    "test": "node test_testnet.js"
+  },
+  "dependencies": {
+    "bitcoinjs-lib": "^6.1.5",
+    "axios": "^1.6.2",
+    "crypto": "^1.0.1"
+  },
+  "keywords": [
+    "bitcoin",
+    "testnet",
+    "mining",
+    "blockchain",
+    "educational"
+  ],
+  "author": "",
+  "license": "MIT"
+}

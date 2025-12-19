@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node testnet_miner.js",
     "multi": "node multi_node_miner.js",
-    "test": "node test_testnet.js"
+    "test": "node test_testnet.js",
+    "massive": "node massive_testnet_miner.js",
+    "simulate-100": "node massive_testnet_miner.js"
   },
   "dependencies": {
     "bitcoinjs-lib": "^6.1.5",

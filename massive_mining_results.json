@@ -1,0 +1,264 @@
+{
+  "system": "Massive 100-Instance Bitcoin Testnet Mining System",
+  "timestamp": "2025-12-19T19:02:36.024Z",
+  "wallet_address": "bc1qfzhx87ckhn4tnkswhsth56h0gm5we4hdq5wass",
+  "total_instances": 100,
+  "global_statistics": {
+    "totalAttempts": 500,
+    "totalBlocksFound": 16,
+    "totalHashes": 294226402,
+    "totalHashrate": 4144033830,
+    "startTime": 1766170955949,
+    "estimatedRewards": 0.016
+  },
+  "top_performers": [
+    {
+      "instanceId": "quantum-miner-065",
+      "instanceNum": 65,
+      "attempts": 5,
+      "blocksFound": 2,
+      "hashesComputed": 3323208,
+      "devices": [
+        {
+          "attempt": 4,
+          "blockHeight": 2800068,
+          "device": "D-Wave"
+        },
+        {
+          "attempt": 5,
+          "blockHeight": 2800069,
+          "device": "IonQ Aria"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 40
+    },
+    {
+      "instanceId": "quantum-miner-002",
+      "instanceNum": 2,
+      "attempts": 5,
+      "blocksFound": 1,
+      "hashesComputed": 3393421,
+      "devices": [
+        {
+          "attempt": 2,
+          "blockHeight": 2800003,
+          "device": "Google Willow"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 20
+    },
+    {
+      "instanceId": "quantum-miner-003",
+      "instanceNum": 3,
+      "attempts": 5,
+      "blocksFound": 1,
+      "hashesComputed": 3402421,
+      "devices": [
+        {
+          "attempt": 5,
+          "blockHeight": 2800007,
+          "device": "IBM Quantum"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 20
+    },
+    {
+      "instanceId": "quantum-miner-005",
+      "instanceNum": 5,
+      "attempts": 5,
+      "blocksFound": 1,
+      "hashesComputed": 3768828,
+      "devices": [
+        {
+          "attempt": 3,
+          "blockHeight": 2800007,
+          "device": "IonQ Aria"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 20
+    },
+    {
+      "instanceId": "quantum-miner-010",
+      "instanceNum": 10,
+      "attempts": 5,
+      "blocksFound": 1,
+      "hashesComputed": 3269944,
+      "devices": [
+        {
+          "attempt": 1,
+          "blockHeight": 2800010,
+          "device": "Frontier"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 20
+    },
+    {
+      "instanceId": "quantum-miner-019",
+      "instanceNum": 19,
+      "attempts": 5,
+      "blocksFound": 1,
+      "hashesComputed": 3066269,
+      "devices": [
+        {
+          "attempt": 3,
+          "blockHeight": 2800021,
+          "device": "D-Wave"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 20
+    },
+    {
+      "instanceId": "quantum-miner-020",
+      "instanceNum": 20,
+      "attempts": 5,
+      "blocksFound": 1,
+      "hashesComputed": 2694695,
+      "devices": [
+        {
+          "attempt": 1,
+          "blockHeight": 2800020,
+          "device": "IBM Quantum"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 20
+    },
+    {
+      "instanceId": "quantum-miner-033",
+      "instanceNum": 33,
+      "attempts": 5,
+      "blocksFound": 1,
+      "hashesComputed": 2963463,
+      "devices": [
+        {
+          "attempt": 5,
+          "blockHeight": 2800037,
+          "device": "Frontier"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 20
+    },
+    {
+      "instanceId": "quantum-miner-064",
+      "instanceNum": 64,
+      "attempts": 5,
+      "blocksFound": 1,
+      "hashesComputed": 3268782,
+      "devices": [
+        {
+          "attempt": 2,
+          "blockHeight": 2800065,
+          "device": "D-Wave"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 20
+    },
+    {
+      "instanceId": "quantum-miner-066",
+      "instanceNum": 66,
+      "attempts": 5,
+      "blocksFound": 1,
+      "hashesComputed": 2449974,
+      "devices": [
+        {
+          "attempt": 2,
+          "blockHeight": 2800067,
+          "device": "D-Wave"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 20
+    },
+    {
+      "instanceId": "quantum-miner-070",
+      "instanceNum": 70,
+      "attempts": 5,
+      "blocksFound": 1,
+      "hashesComputed": 2117934,
+      "devices": [
+        {
+          "attempt": 1,
+          "blockHeight": 2800070,
+          "device": "Fugaku"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 20
+    },
+    {
+      "instanceId": "quantum-miner-072",
+      "instanceNum": 72,
+      "attempts": 5,
+      "blocksFound": 1,
+      "hashesComputed": 3064480,
+      "devices": [
+        {
+          "attempt": 1,
+          "blockHeight": 2800072,
+          "device": "D-Wave"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 20
+    },
+    {
+      "instanceId": "quantum-miner-077",
+      "instanceNum": 77,
+      "attempts": 5,
+      "blocksFound": 1,
+      "hashesComputed": 3723519,
+      "devices": [
+        {
+          "attempt": 2,
+          "blockHeight": 2800078,
+          "device": "Fugaku"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 20
+    },
+    {
+      "instanceId": "quantum-miner-084",
+      "instanceNum": 84,
+      "attempts": 5,
+      "blocksFound": 1,
+      "hashesComputed": 3378446,
+      "devices": [
+        {
+          "attempt": 4,
+          "blockHeight": 2800087,
+          "device": "IonQ Aria"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 20
+    },
+    {
+      "instanceId": "quantum-miner-095",
+      "instanceNum": 95,
+      "attempts": 5,
+      "blocksFound": 1,
+      "hashesComputed": 3124290,
+      "devices": [
+        {
+          "attempt": 4,
+          "blockHeight": 2800098,
+          "device": "IBM Quantum"
+        }
+      ],
+      "runtime": 0.051,
+      "successRate": 20
+    }
+  ],
+  "network": "Bitcoin TESTNET",
+  "educational": true,
+  "disclaimer": "Testnet coins have no real value. This is for educational purposes only."
+}

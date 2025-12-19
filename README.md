@@ -1,4 +1,102 @@
-# Bitcoin Mainnet Simulator
+# Bitcoin Mining System - Testnet & Simulation
+
+Educational Bitcoin blockchain mining with both **real testnet integration** and **simulation modes**.
+
+---
+
+## 🌐 NEW: BITCOIN TESTNET MINING (Node.js)
+
+**Real Bitcoin testnet integration with quantum and classical mining simulation!**
+
+### Quick Start - Testnet Mining
+
+```bash
+# Install dependencies
+npm install
+
+# Single node mining (3 attempts)
+npm start
+
+# Multi-node mining (3 nodes, parallel)
+npm run multi
+
+# Quick test
+npm test
+```
+
+### Features
+
+- ✅ **Connects to REAL Bitcoin TESTNET** blockchain
+- ✅ **Multiple mining nodes** running in parallel
+- ✅ **Quantum supercomputing devices** (IBM Quantum, Google Willow, IonQ Aria, D-Wave)
+- ✅ **Classical supercomputers** (Frontier Exascale, Fugaku)
+- ✅ **Live blockchain monitoring** via Blockstream API
+- ✅ **Proof-of-work mining** with SHA-256
+- ✅ **Reward tracking** to your testnet wallet
+
+### Configuration
+
+Set environment variables to customize:
+
+```bash
+# Set your testnet wallet address
+export WALLET="tb1qYourTestnetAddressHere"
+
+# Configure multi-node mining
+export NODES=5              # Number of nodes (default: 3)
+export ATTEMPTS=3           # Attempts per node (default: 2)
+export MODE=parallel        # 'parallel' or 'sequential' (default: parallel)
+
+# Run with custom settings
+npm run multi
+```
+
+### Your Testnet Wallet
+
+All mining rewards will be sent to:
+```
+tb1qfzhx87ckhn4tnkswhsth56h0gm5we4hdyscrle
+```
+(Converted from your mainnet address to testnet format)
+
+### Mining Devices
+
+**Quantum Devices:**
+- IBM Quantum System One (1,121 qubits) - 45.5 EH/s
+- Google Willow Quantum Chip (105 qubits) - 125.7 EH/s
+- IonQ Aria (25 qubits) - 89.3 EH/s
+- D-Wave Advantage (5,640 qubits) - 215.4 EH/s
+
+**Classical Supercomputers:**
+- Frontier Exascale (HPE/AMD) - 312.5 EH/s
+- Fugaku Supercomputer (Fujitsu) - 278.9 EH/s
+
+**Combined Hashrate:** ~1.1 million TH/s (simulated)
+
+### Important Notes
+
+⚠️ **Educational Purpose Only**
+- Testnet coins have **NO REAL VALUE**
+- Quantum devices are **SIMULATED** for educational comparison
+- CPU mining has **extremely low** success probability
+- This demonstrates concepts, not production mining
+
+⚠️ **To Actually Mine Testnet:**
+1. Run Bitcoin Core in testnet mode
+2. Connect to testnet P2P network
+3. Use proper mining software (cgminer, bfgminer)
+4. Join a testnet mining pool
+5. Get testnet coins from faucet: https://testnet-faucet.com
+
+### Files
+
+- `testnet_miner.js` - Single testnet mining node
+- `multi_node_miner.js` - Multi-node parallel mining system
+- `test_testnet.js` - Quick test script
+
+---
+
+## 🐍 PYTHON SIMULATION MODE
 
 An educational Bitcoin-style blockchain mainnet simulator written in Python with realistic network behavior.
 

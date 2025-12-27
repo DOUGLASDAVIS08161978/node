@@ -8,7 +8,8 @@
     "multi": "node multi_node_miner.js",
     "test": "node test_testnet.js",
     "monero": "node monero-miner.js",
-    "monero:multi": "node monero-miner.js 5"
+    "monero:multi": "node monero-miner.js 5",
+    "monero:full": "node monero-network-simulator.js"
   },
   "dependencies": {
     "bitcoinjs-lib": "^6.1.5",

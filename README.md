@@ -1,6 +1,58 @@
-# Bitcoin Mining System - Testnet & Simulation
+# Cryptocurrency Mining System - Testnet & Simulation
 
-Educational Bitcoin blockchain mining with both **real testnet integration** and **simulation modes**.
+Educational cryptocurrency mining with **Bitcoin testnet integration**, **Monero simulation**, and **simulation modes**.
+
+---
+
+## 🔐 NEW: MONERO MINING SIMULATION (Node.js)
+
+**Educational Monero (XMR) mining simulation with CryptoNight algorithm!**
+
+### Quick Start - Monero Mining
+
+```bash
+# Install dependencies
+npm install
+
+# Mine 3 Monero blocks (default)
+npm run monero
+
+# Mine 5 Monero blocks
+npm run monero:multi
+```
+
+### Features
+
+- ✅ **Simulates CryptoNight hash algorithm**
+- ✅ **Block creation and validation**
+- ✅ **Proof-of-work mining** with nonce iteration
+- ✅ **Block broadcasting** to simulated Monero network
+- ✅ **Mining rewards tracking** (XMR)
+- ✅ **Real-time hashrate monitoring** (KH/s)
+- ✅ **Currency conversion simulation** (XMR → BTC)
+
+### What It Does
+
+The Monero simulator demonstrates:
+- Mining blocks using proof-of-work
+- CryptoNight hash algorithm (simplified)
+- Block validation and verification
+- Broadcasting to Monero network peers
+- Calculating mining rewards
+- Educational currency conversion
+
+### Important Notes
+
+⚠️ **Educational Purpose Only**
+- This is a **SIMULATION** - no real Monero is mined
+- Does **NOT** connect to real Monero blockchain
+- Does **NOT** mine actual XMR cryptocurrency
+- Does **NOT** transfer or convert real currency
+- For learning purposes only!
+
+### Files
+
+- `monero-miner.js` - Monero mining simulation with CryptoNight
 
 ---
 

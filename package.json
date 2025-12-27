@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node testnet_miner.js",
     "multi": "node multi_node_miner.js",
-    "test": "node test_testnet.js"
+    "test": "node test_testnet.js",
+    "monero": "node monero-miner.js",
+    "monero:multi": "node monero-miner.js 5"
   },
   "dependencies": {
     "bitcoinjs-lib": "^6.1.5",

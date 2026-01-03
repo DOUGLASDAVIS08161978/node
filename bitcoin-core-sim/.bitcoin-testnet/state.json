@@ -1,0 +1,86 @@
+{
+  "network": "testnet",
+  "blockHeight": 2800703,
+  "blocks": [],
+  "wallet": {
+    "address": "tb1qfzhx87ckhn4tnkswhsth56h0gm5we4hdyscrle",
+    "balance": 0.005977150249744162,
+    "transactions": [
+      {
+        "address": "tb1qfzhx87ckhn4tnkswhsth56h0gm5we4hdyscrle",
+        "category": "generate",
+        "amount": 0.001203979743281806,
+        "vout": 0,
+        "confirmations": 1,
+        "blockhash": "00000136577ea2b9898ca8e8240e7167b0273d32977a7645316fb7f1c7a",
+        "blockheight": 2800699,
+        "blockindex": 0,
+        "blocktime": 1767413874,
+        "txid": "888b546aa08cc527f3a94d28b31fe3f117c258a5d74f0d751de3674a15b72dea",
+        "time": 1767413874,
+        "timereceived": 1767413874
+      },
+      {
+        "address": "tb1qfzhx87ckhn4tnkswhsth56h0gm5we4hdyscrle",
+        "category": "generate",
+        "amount": 0.001169208002753943,
+        "vout": 0,
+        "confirmations": 1,
+        "blockhash": "00000856fd2a0a975a270493af813648de798b934e29b848b59a419bf17",
+        "blockheight": 2800700,
+        "blockindex": 0,
+        "blocktime": 1767413874,
+        "txid": "394508f4b7d57c560d4d0dbe4f2dc8c07bc07576f21c3ded0597d2bda8e1e3a7",
+        "time": 1767413874,
+        "timereceived": 1767413874
+      },
+      {
+        "address": "tb1qfzhx87ckhn4tnkswhsth56h0gm5we4hdyscrle",
+        "category": "generate",
+        "amount": 0.0011281765573244377,
+        "vout": 0,
+        "confirmations": 1,
+        "blockhash": "000000f8625723adef7a0ee243d7ba2dfe2d1feab6243622be021eb787e",
+        "blockheight": 2800701,
+        "blockindex": 0,
+        "blocktime": 1767413874,
+        "txid": "b08b08a239d1a51ec51d00911005667fb988967e1a2fad573903c7f4416fc3da",
+        "time": 1767413874,
+        "timereceived": 1767413874
+      },
+      {
+        "address": "tb1qfzhx87ckhn4tnkswhsth56h0gm5we4hdyscrle",
+        "category": "generate",
+        "amount": 0.0012029954810396962,
+        "vout": 0,
+        "confirmations": 1,
+        "blockhash": "00000de007c40f063138c745903085de795c47ee6c4c3a62aec11949a53",
+        "blockheight": 2800702,
+        "blockindex": 0,
+        "blocktime": 1767413874,
+        "txid": "10f237a7dc5c0d9eab96258dc29b703403bc85ba94ef43abc9136561dcf9f588",
+        "time": 1767413874,
+        "timereceived": 1767413874
+      },
+      {
+        "address": "tb1qfzhx87ckhn4tnkswhsth56h0gm5we4hdyscrle",
+        "category": "generate",
+        "amount": 0.0012727904653442783,
+        "vout": 0,
+        "confirmations": 1,
+        "blockhash": "000003009a1c9029a3278244aac14c585c3976a0e8a2cb687c367eefc42",
+        "blockheight": 2800703,
+        "blockindex": 0,
+        "blocktime": 1767413874,
+        "txid": "7668327fb8430ade813ccb6752de74a7873fbfb213472baa6e62c819ae37a7d7",
+        "time": 1767413874,
+        "timereceived": 1767413874
+      }
+    ]
+  },
+  "peers": 8,
+  "running": true,
+  "syncProgress": 100,
+  "difficulty": 1,
+  "hashrate": 0
+}

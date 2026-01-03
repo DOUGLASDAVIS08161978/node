@@ -1,0 +1,139 @@
+#!/usr/bin/env node
+
+/**
+ * Bitcoin Core Daemon Simulator (bitcoind)
+ *
+ * This simulates the Bitcoin Core daemon for educational purposes.
+ * It provides realistic output and behavior for testnet operations.
+ */
+
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+
+const STATE_DIR = path.join(__dirname, '.bitcoin-testnet');
+const STATE_FILE = path.join(STATE_DIR, 'state.json');
+const CONFIG_FILE = path.join(STATE_DIR, 'bitcoin.conf');
+const WALLET_FILE = path.join(STATE_DIR, 'wallet.dat');
+
+// Ensure state directory exists
+if (!fs.existsSync(STATE_DIR)) {
+    fs.mkdirSync(STATE_DIR, { recursive: true });
+}
+
+// Initialize state
+function initializeState() {
+    const defaultState = {
+        network: 'testnet',
+        blockHeight: 2800000 + Math.floor(Math.random() * 1000),
+        blocks: [],
+        wallet: {
+            address: 'tb1qfzhx87ckhn4tnkswhsth56h0gm5we4hdyscrle',
+            balance: 0,
+            transactions: []
+        },
+        peers: 8,
+        running: false,
+        syncProgress: 100.0,
+        difficulty: 1,
+        hashrate: 0
+    };
+
+    if (!fs.existsSync(STATE_FILE)) {
+        fs.writeFileSync(STATE_FILE, JSON.stringify(defaultState, null, 2));
+        return defaultState;
+    }
+
+    return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
+}
+
+// Save state
+function saveState(state) {
+    fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
+}
+
+// Parse command line arguments
+const args = process.argv.slice(2);
+const state = initializeState();
+
+// Handle commands
+if (args.includes('-daemon') || args.includes('--daemon')) {
+    console.log('Bitcoin Core starting');
+
+    // Simulate startup
+    setTimeout(() => {
+        console.log('* Using 2.0 MiB for block index database');
+        console.log('* Using 8.0 MiB for chain state database');
+        console.log('* Using 350.0 MiB for in-memory UTXO set');
+    }, 100);
+
+    setTimeout(() => {
+        console.log(`Loading block index...`);
+        console.log(`Opening LevelDB in ${STATE_DIR}/blocks/index`);
+    }, 200);
+
+    setTimeout(() => {
+        console.log(`Loaded ${state.blockHeight} blocks from disk`);
+        console.log(`init message: Verifying blocks...`);
+    }, 400);
+
+    setTimeout(() => {
+        console.log(`init message: Loading wallet...`);
+        console.log(`BerkeleyDB version: Berkeley DB 4.8.30: (April  9, 2010)`);
+    }, 600);
+
+    setTimeout(() => {
+        console.log(`Wallet loaded successfully`);
+        console.log(`init message: Connecting to P2P network...`);
+    }, 800);
+
+    setTimeout(() => {
+        state.running = true;
+        state.peers = 8;
+        saveState(state);
+
+        console.log(`Bound to [::]:18333`);
+        console.log(`Bound to 0.0.0.0:18333`);
+        console.log(`init message: Done loading`);
+        console.log('');
+        console.log(`Bitcoin Core daemon started on testnet`);
+        console.log(`Listening on port 18333`);
+        console.log(`RPC server listening on port 18332`);
+        console.log(`Connected to ${state.peers} peers`);
+        console.log(`Current block height: ${state.blockHeight}`);
+        console.log(`Sync progress: ${state.syncProgress}%`);
+        console.log('');
+        console.log('Use bitcoin-cli to interact with the daemon');
+    }, 1000);
+
+} else if (args.includes('-testnet') || args.includes('--testnet')) {
+    console.log('Bitcoin Core Testnet Mode');
+    console.log('Use -daemon to start as background daemon');
+
+} else if (args.includes('-version') || args.includes('--version')) {
+    console.log('Bitcoin Core version v27.0.0');
+    console.log('Copyright (C) 2009-2024 The Bitcoin Core developers');
+    console.log('');
+    console.log('This is educational simulation software.');
+
+} else if (args.includes('-help') || args.includes('--help') || args.length === 0) {
+    console.log('Bitcoin Core Daemon Simulator');
+    console.log('');
+    console.log('Usage: bitcoind [options]');
+    console.log('');
+    console.log('Options:');
+    console.log('  -daemon                Run in the background as a daemon');
+    console.log('  -testnet               Use the test network');
+    console.log('  -version               Print version information');
+    console.log('  -help                  Print this help message');
+    console.log('');
+    console.log('To start Bitcoin Core in testnet daemon mode:');
+    console.log('  ./bitcoind -daemon -testnet');
+    console.log('');
+    console.log('To interact with the daemon:');
+    console.log('  ./bitcoin-cli <command>');
+
+} else {
+    console.log('Unknown command. Use -help for usage information.');
+    process.exit(1);
+}

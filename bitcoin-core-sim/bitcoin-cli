@@ -1,0 +1,322 @@
+#!/usr/bin/env node
+
+/**
+ * Bitcoin CLI Simulator (bitcoin-cli)
+ *
+ * Command-line interface for interacting with simulated Bitcoin Core
+ */
+
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+
+const STATE_DIR = path.join(__dirname, '.bitcoin-testnet');
+const STATE_FILE = path.join(STATE_DIR, 'state.json');
+
+// Load state
+function loadState() {
+    if (!fs.existsSync(STATE_FILE)) {
+        console.error('Error: Bitcoin Core is not running. Start it with: ./bitcoind -daemon -testnet');
+        process.exit(1);
+    }
+    return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
+}
+
+// Save state
+function saveState(state) {
+    fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
+}
+
+// Generate block hash
+function generateBlockHash() {
+    return '00000' + crypto.randomBytes(27).toString('hex').slice(0, 59);
+}
+
+// Generate transaction ID
+function generateTxid() {
+    return crypto.randomBytes(32).toString('hex');
+}
+
+// Commands
+const commands = {
+    getblockchaininfo: (state) => {
+        return {
+            chain: 'test',
+            blocks: state.blockHeight,
+            headers: state.blockHeight,
+            bestblockhash: generateBlockHash(),
+            difficulty: state.difficulty,
+            mediantime: Math.floor(Date.now() / 1000) - 300,
+            verificationprogress: state.syncProgress / 100,
+            initialblockdownload: false,
+            chainwork: '0000000000000000000000000000000000000000000000' + state.blockHeight.toString(16),
+            size_on_disk: 45000000000,
+            pruned: false,
+            warnings: ''
+        };
+    },
+
+    getnetworkinfo: (state) => {
+        return {
+            version: 270000,
+            subversion: '/Satoshi:27.0.0/',
+            protocolversion: 70016,
+            localservices: '0000000000000409',
+            localrelay: true,
+            timeoffset: 0,
+            networkactive: true,
+            connections: state.peers,
+            networks: [
+                {
+                    name: 'ipv4',
+                    limited: false,
+                    reachable: true,
+                    proxy: '',
+                    proxy_randomize_credentials: false
+                }
+            ],
+            relayfee: 0.00001000,
+            incrementalfee: 0.00001000,
+            localaddresses: [],
+            warnings: ''
+        };
+    },
+
+    getpeerinfo: (state) => {
+        const peers = [];
+        const peerIPs = [
+            '45.32.12.88:18333',
+            '91.205.173.2:18333',
+            '138.68.61.183:18333',
+            '167.99.112.45:18333',
+            '78.141.208.27:18333',
+            '123.45.67.89:18333',
+            '198.51.100.42:18333',
+            '203.0.113.15:18333'
+        ];
+
+        for (let i = 0; i < state.peers; i++) {
+            peers.push({
+                id: i + 1,
+                addr: peerIPs[i] || `192.0.2.${i + 1}:18333`,
+                addrbind: `127.0.0.1:${18333 + i}`,
+                network: 'ipv4',
+                services: '000000000000040d',
+                servicesnames: ['NETWORK', 'BLOOM', 'WITNESS', 'NETWORK_LIMITED'],
+                relaytxes: true,
+                lastsend: Math.floor(Date.now() / 1000) - Math.floor(Math.random() * 60),
+                lastrecv: Math.floor(Date.now() / 1000) - Math.floor(Math.random() * 60),
+                last_transaction: Math.floor(Date.now() / 1000) - Math.floor(Math.random() * 300),
+                last_block: Math.floor(Date.now() / 1000) - Math.floor(Math.random() * 600),
+                bytessent: 1000000 + Math.floor(Math.random() * 9000000),
+                bytesrecv: 1000000 + Math.floor(Math.random() * 9000000),
+                conntime: Math.floor(Date.now() / 1000) - 3600 - Math.floor(Math.random() * 86400),
+                timeoffset: 0,
+                pingtime: 0.05 + Math.random() * 0.2,
+                minping: 0.03 + Math.random() * 0.1,
+                version: 70016,
+                subver: '/Satoshi:27.0.0/',
+                inbound: i % 2 === 0,
+                bip152_hb_to: false,
+                bip152_hb_from: false,
+                startingheight: state.blockHeight - Math.floor(Math.random() * 10),
+                synced_headers: state.blockHeight,
+                synced_blocks: state.blockHeight,
+                inflight: [],
+                addr_relay_enabled: true,
+                addr_processed: 100 + Math.floor(Math.random() * 900),
+                addr_rate_limited: 0,
+                permissions: [],
+                minfeefilter: 0.00001000,
+                bytessent_per_msg: {},
+                bytesrecv_per_msg: {}
+            });
+        }
+        return peers;
+    },
+
+    getwalletinfo: (state) => {
+        return {
+            walletname: 'mining_wallet',
+            walletversion: 169900,
+            format: 'sqlite',
+            balance: state.wallet.balance,
+            unconfirmed_balance: 0,
+            immature_balance: state.wallet.immature || 0,
+            txcount: state.wallet.transactions.length,
+            keypoolsize: 1000,
+            keypoolsize_hd_internal: 1000,
+            paytxfee: 0.00000000,
+            private_keys_enabled: true,
+            avoid_reuse: false,
+            scanning: false,
+            descriptors: true,
+            external_signer: false
+        };
+    },
+
+    getnewaddress: (state, args) => {
+        // Return the configured wallet address
+        return state.wallet.address;
+    },
+
+    getbalance: (state) => {
+        return state.wallet.balance;
+    },
+
+    listtransactions: (state, args) => {
+        const count = args[0] ? parseInt(args[0]) : 10;
+        return state.wallet.transactions.slice(-count).map(tx => ({
+            address: tx.address,
+            category: tx.category,
+            amount: tx.amount,
+            vout: tx.vout || 0,
+            confirmations: tx.confirmations,
+            generated: tx.category === 'generate' || tx.category === 'immature',
+            blockhash: tx.blockhash,
+            blockheight: tx.blockheight,
+            blockindex: tx.blockindex || 0,
+            blocktime: tx.blocktime,
+            txid: tx.txid,
+            time: tx.time,
+            timereceived: tx.timereceived
+        }));
+    },
+
+    getmininginfo: (state) => {
+        return {
+            blocks: state.blockHeight,
+            currentblockweight: 0,
+            currentblocktx: 0,
+            difficulty: state.difficulty,
+            networkhashps: 150000000000000, // 150 TH/s simulated network hashrate
+            pooledtx: Math.floor(Math.random() * 50) + 100,
+            chain: 'test',
+            warnings: '',
+            generateto: state.wallet.address
+        };
+    },
+
+    generatetoaddress: (state, args) => {
+        if (!args[0] || !args[1]) {
+            console.error('Error: generatetoaddress requires <nblocks> <address>');
+            process.exit(1);
+        }
+
+        const numBlocks = parseInt(args[0]);
+        const address = args[1];
+        const blockHashes = [];
+
+        console.log(`\n⛏️  Mining ${numBlocks} block(s) to ${address}...\n`);
+
+        for (let i = 0; i < numBlocks; i++) {
+            const blockHash = generateBlockHash();
+            const txid = generateTxid();
+            const reward = 0.001 + (Math.random() * 0.0003);
+            const fees = Math.random() * 0.0002;
+            const totalReward = reward + fees;
+
+            state.blockHeight++;
+            blockHashes.push(blockHash);
+
+            // Add transaction to wallet
+            const tx = {
+                address: address,
+                category: 'generate',
+                amount: totalReward,
+                vout: 0,
+                confirmations: 1,
+                blockhash: blockHash,
+                blockheight: state.blockHeight,
+                blockindex: 0,
+                blocktime: Math.floor(Date.now() / 1000),
+                txid: txid,
+                time: Math.floor(Date.now() / 1000),
+                timereceived: Math.floor(Date.now() / 1000)
+            };
+
+            state.wallet.transactions.push(tx);
+            state.wallet.balance += totalReward;
+
+            // Show progress
+            const miningTime = (Math.random() * 10 + 5).toFixed(2);
+            const hashrate = (Math.random() * 200 + 100).toFixed(1);
+
+            console.log(`✅ Block ${i + 1}/${numBlocks} mined`);
+            console.log(`   Height: ${state.blockHeight}`);
+            console.log(`   Hash: ${blockHash}`);
+            console.log(`   Reward: ${totalReward.toFixed(8)} tBTC`);
+            console.log(`   Time: ${miningTime}s @ ${hashrate} TH/s`);
+            console.log(`   TXID: ${txid}`);
+            console.log('');
+        }
+
+        saveState(state);
+
+        console.log(`🎉 Successfully mined ${numBlocks} block(s)!`);
+        console.log(`💰 Total rewards: ${(numBlocks * 0.0012).toFixed(8)} tBTC`);
+        console.log(`📊 New balance: ${state.wallet.balance.toFixed(8)} tBTC`);
+        console.log(`📈 Current height: ${state.blockHeight}`);
+        console.log('');
+
+        return blockHashes;
+    },
+
+    stop: (state) => {
+        state.running = false;
+        saveState(state);
+        console.log('Bitcoin Core stopping');
+        console.log('Shutdown complete');
+        return null;
+    },
+
+    help: () => {
+        return `Available commands:
+  getblockchaininfo         Get blockchain information
+  getnetworkinfo            Get network information
+  getpeerinfo               Get connected peer information
+  getwalletinfo             Get wallet information
+  getnewaddress            Generate new address
+  getbalance               Get wallet balance
+  listtransactions [count]  List recent transactions
+  getmininginfo            Get mining information
+  generatetoaddress <n> <address>  Mine n blocks to address
+  stop                     Stop Bitcoin Core daemon
+  help                     Show this help message`;
+    }
+};
+
+// Main
+const args = process.argv.slice(2);
+
+if (args.length === 0 || args[0] === 'help' || args[0] === '--help') {
+    console.log(commands.help());
+    process.exit(0);
+}
+
+const command = args[0];
+const commandArgs = args.slice(1);
+
+try {
+    const state = loadState();
+
+    if (!state.running && command !== 'stop') {
+        console.error('Error: Bitcoin Core daemon not running');
+        console.error('Start it with: ./bitcoind -daemon -testnet');
+        process.exit(1);
+    }
+
+    if (commands[command]) {
+        const result = commands[command](state, commandArgs);
+        if (result !== null && result !== undefined) {
+            console.log(JSON.stringify(result, null, 2));
+        }
+    } else {
+        console.error(`Error: Unknown command '${command}'`);
+        console.error('Use "bitcoin-cli help" for available commands');
+        process.exit(1);
+    }
+} catch (error) {
+    console.error('Error:', error.message);
+    process.exit(1);
+}
